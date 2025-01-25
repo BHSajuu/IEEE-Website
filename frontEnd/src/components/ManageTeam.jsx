@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import members from "../utility/TeamData";
+import {members} from "../utility/TeamData";
 
 function ManageTeam() {
     // Initialize the teamMembers state with the imported members data
@@ -124,11 +124,11 @@ function ManageTeam() {
             <div>
                 <h3 className="text-md font-semibold mb-2">Current Team Members</h3>
                 {teamMembers.length > 0 ? (
-                    <ul className="grid grid-cols-2 gap-10">
+                    <ul className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full ">
                         {teamMembers.map((member) => (
                             <li
                                 key={member.id}
-                                className="w-3/4 flex items-center bg-gray-100 p-4 rounded shadow-sm"
+                                className="w-3/4 flex items-center bg-gray-100 p-4 rounded-lg shadow-sm hover:scale-105 transition transform hover:shadow-lg"
                             >
                                 {/* Left side - Text details */}
                                 <div className="flex-1">

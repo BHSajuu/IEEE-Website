@@ -40,3 +40,81 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Add glitch effect */
+.glitch-effect {
+  position: relative;
+  color: #00ffcc; /* Neon color */
+  font-size: 3rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  animation: glitch 1.5s infinite;
+  overflow: hidden;
+}
+
+/* Neon shadow for glow effect */
+.glitch-effect::before,
+.glitch-effect::after {
+  content: 'Latest News';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #ff0066; /* Secondary glitch color */
+  z-index: -1;
+  clip-path: polygon(0 2%, 100% 0%, 100% 90%, 0% 100%);
+  animation: glitch-shadow 1.5s infinite;
+}
+
+/* Glitch animation keyframes */
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-3px, -3px);
+  }
+  40% {
+    transform: translate(3px, 3px);
+  }
+  60% {
+    transform: translate(-3px, 3px);
+  }
+  80% {
+    transform: translate(3px, -3px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+@keyframes glitch-shadow {
+  0% {
+    clip-path: polygon(0 2%, 100% 0%, 100% 90%, 0% 100%);
+  }
+  50% {
+    clip-path: polygon(10% 10%, 90% 0%, 100% 80%, 10% 90%);
+  }
+  100% {
+    clip-path: polygon(0 2%, 100% 0%, 100% 90%, 0% 100%);
+  }
+}
+
+
+.floating-favorite-icon {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: floatUp 1s ease-in-out forwards;
+}
+
+@keyframes floatUp {
+  0% {
+      opacity: 1;
+      transform: translate(-50%, 0);
+  }
+  100% {
+      opacity: 0;
+      transform: translate(-50%, -100px);
+  }
+}

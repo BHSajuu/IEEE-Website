@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-
+import Ping from "./Animation/ping";
 const Header = () => {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -8,7 +8,7 @@ const Header = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <div className="bg-custom-blue text-black p-4 shadow-lg">
+    <div className="fixed top-0 w-full z-10 bg-dark-2 text-indigo-100 p-4 shadow-lg">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo and Society Name */}
         <div className="flex items-center">
@@ -17,13 +17,13 @@ const Header = () => {
             alt="Logo"
             className="w-30 h-12 mr-3 rounded-full object-cover"
           />
-          <h1 className="text-3xl font-bold">IEEE Silchar</h1>
+          <h1 className="text-4xl text-indigo-100 font-bold">IEEE Silchar</h1>
         </div>
 
         {/* Hamburger Menu (Mobile) */}
         <button
           onClick={() => setMenuOpen(true)}
-          className="lg:hidden block text-black focus:outline-none"
+          className="lg:hidden block text-white focus:outline-none"
         >
           <svg
             className="w-6 h-6"
@@ -50,7 +50,7 @@ const Header = () => {
                 ? { textDecoration: "underline", textUnderlineOffset: "6px" }
                 : {}
             }
-            className="block lg:inline mx-4 my-2 lg:my-0 hover:text-white"
+            className="block lg:inline mx-4 my-2 p-1 lg:my-0 hover:bg-custom-blue hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out"
           >
             Home
           </a>
@@ -61,10 +61,27 @@ const Header = () => {
                 ? { textDecoration: "underline", textUnderlineOffset: "6px" }
                 : {}
             }
-            className="block lg:inline mx-4 my-2 lg:my-0 hover:text-white"
+            className="block lg:inline mx-4 my-2 p-1 lg:my-0 hover:bg-custom-blue hover:text-black hover:scale-105 hover:rounded-lg  transition-transform duration-300 ease-in-out"
           >
             Section
           </a>
+
+          <a
+            href="/news"
+            style={
+              isActive("/news")
+                ? { textDecoration: "underline", textUnderlineOffset: "6px" }
+                : {}
+            }
+            className="relative flex items-center mx-4 my-2 p-1 lg:my-0 hover:bg-custom-blue hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out"
+          >
+            <span>News</span>
+            <span className="absolute top-0 right-0 -translate-y-0.5 translate-x-1/2">
+              <Ping />
+            </span>
+          </a>
+
+
           <a
             href="/events"
             style={
@@ -72,7 +89,7 @@ const Header = () => {
                 ? { textDecoration: "underline", textUnderlineOffset: "6px" }
                 : {}
             }
-            className="block lg:inline mx-4 my-2 lg:my-0 hover:text-white"
+            className="block lg:inline mx-4 my-2 p-1 lg:my-0 hover:bg-custom-blue hover:text-black  hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out"
           >
             Events
           </a>
@@ -83,7 +100,7 @@ const Header = () => {
                 ? { textDecoration: "underline", textUnderlineOffset: "6px" }
                 : {}
             }
-            className="block lg:inline mx-4 my-2 lg:my-0 hover:text-white"
+            className="block lg:inline mx-4 my-2 p-1 lg:my-0 hover:bg-custom-blue hover:text-black  hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out"
           >
             Team
           </a>
@@ -94,7 +111,7 @@ const Header = () => {
                 ? { textDecoration: "underline", textUnderlineOffset: "6px" }
                 : {}
             }
-            className="block lg:inline mx-4 my-2 lg:my-0 hover:text-white"
+            className="block lg:inline mx-4 my-2 p-1 lg:my-0 hover:bg-custom-blue hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out"
           >
             Contact Us
           </a>
@@ -105,7 +122,7 @@ const Header = () => {
                 ? { textDecoration: "underline", textUnderlineOffset: "6px" }
                 : {}
             }
-            className="block lg:inline mx-4 my-2 lg:my-0 hover:text-white"
+            className="block lg:inline mx-4 my-2 p-1  lg:my-0 hover:bg-custom-blue  hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out"
           >
             Admin Dashboard
           </a>
@@ -171,6 +188,19 @@ const Header = () => {
               >
                 Events
               </a>
+
+              <a
+                href="/news"
+                style={
+                  isActive("/news")
+                    ? { textDecoration: "underline", textUnderlineOffset: "6px" }
+                    : {}
+                }
+                className="block text-lg text-gray-800 hover:font-bold"
+              >
+                News
+              </a>
+
               <a
                 href="/team"
                 style={

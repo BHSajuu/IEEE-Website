@@ -8,7 +8,7 @@ import Section from './Pages/Section';
 import Home from "./Pages/Home";
 import PageNotFound from './Pages/PageNotFound';
 import Dashboard from './Pages/Dashboard';
-
+import News from './Pages/News';
 
 const App = () => {
   return (
@@ -20,6 +20,7 @@ const App = () => {
           <Route path="/team" element={<Team />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path='/dashboard' element={<Dashboard/>}/>
+          <Route path="/news" element={<News />} />
           <Route path='*' element={<PageNotFound/>}/>
         </Routes>
        </main>

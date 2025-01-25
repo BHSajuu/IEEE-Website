@@ -22,7 +22,7 @@ const Home = () => {
 
     return (
         <main>
-            <section className="relative flex flex-col lg:flex-row  justify-between items-center max-w-7xl mx-auto p-6 gap-8">
+            <section className="mt-20 relative flex flex-col lg:flex-row  justify-between items-center max-w-7xl mx-auto p-6 gap-8">
                 {/* Left Content */}
                 <div className="flex-1">
                     {/* Heading Animation */}
