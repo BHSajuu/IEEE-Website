@@ -45,7 +45,7 @@ function ManageTeam() {
     };
 
     return (
-        <div className="bg-white shadow rounded p-4 max-h-screen overflow-y-auto">
+        <div className="bg-white shadow rounded p-4 sm:max-h-screen overflow-y-auto ">
             <div className="flex flex-col justify-between items-center mb-4">
                 <h2 className="text-lg font-bold">Manage Team Members</h2>
                 <div className="mb-4">

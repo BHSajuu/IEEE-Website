@@ -75,16 +75,17 @@ const members = [
       userName: "Tony Stack",
       title: "Shrimp and Chorizo Paella",
       date: "September 14, 2016",
-      description: "This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.",
+      description: " This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.",
       avaterUrl: "assets/roboIm3.jpg",
       newsUrl: "assets/roboIm2.jpg",
     },
+    
     {
       id: 2,
       userName: "Tony Stack",
       title: "The Best Ever Vegan Chocolate Chip Cookies",
       date: "July 5, 2023",
-      description: "These chewy, gooey vegan chocolate chip cookies are the best! They're made with simple ingredients and are sure to satisfy your sweet tooth.",
+      description: " Lorem ipsum dolor sit amet consectetur adipisicing elit. A itaque voluptates est nemo cumque vero perspiciatis quas magnam obcaecati fuga natus officiis earum voluptate molestias, sequi nihil unde cum laborum?Quam quia provident quaerat atque poimus animi, molestias vitae aliquam at ipsam itaque, aspernatur, dolorum officia pariatur numquam recusandae minima odio repellendus nisi! Esse beatae, corporis earum sed sint facere. Ad ab cum veniam facilis aut repellat autem atque incidunt cumque ipsum commodi, dolores rerum provident velit quo omnis quod modi saepe reiciendis fugit quos ex reprehenderit. Eos, modi dignissimos? At unde maiores deserunt temporibus porro adipisci quae velit eos officiis eveniet voluptate possimus veritatis fugiat aliquam doloremque eaque quod, quas eius ipsum reiciendis optio. Culpa atque cum quis voluptatem. est! Ea atque libero sequi neque numquam non! Dolor voluptates provident vitae! Maxime, deserunt illo? Rerum blanditiis ratione, accusamus amet a libero? Numquam inventore consectetur assumenda asperiores repellat laudantium! This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.",
       avaterUrl: "assets/image1.jpg", // Replace with actual image path
       newsUrl: "assets/eventImage1.jpg", // Replace with actual image path
     },

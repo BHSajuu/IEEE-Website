@@ -2,7 +2,7 @@ import React from 'react';
 
 const MemberCard = ({ name, position, image, year, link }) => {
   return (
-    <div className="bg-custom-color3 w-80 p-6 rounded-lg shadow-lg text-center hover:shadow-2xl transition-shadow duration-300 hover:scale-105 transition-transform duration-300 ease-in-out">
+    <div className="bg-gradient-to-t from-indigo-300 to-lime-300 w-80 p-6 rounded-lg shadow-lg text-center hover:shadow-2xl transition-shadow duration-300 hover:scale-105 transition-transform duration-300 ease-in-out">
       <img src={image} alt={name} className="rounded-full w-350 h-35 mx-auto mb-4 border-4 border-blue-700" />
       <h3 className="text-lg font-semibold text-black">{name}</h3>
       <p className="text-black">{position}</p>

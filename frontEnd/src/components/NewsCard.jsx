@@ -9,6 +9,7 @@ import {
     Button,
     DialogContent,
     DialogTitle,
+    TextField,
 } from '@mui/material';
 import React, { useState } from 'react';
 import CardActions from '@mui/material/CardActions';
@@ -17,12 +18,15 @@ import ShareIcon from '@mui/icons-material/Share';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import FacebookIcon from '@mui/icons-material/Facebook';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+
 
 function NewsCard({ newsItem }) {
     const [isFavorite, setIsFavorite] = useState(false); // State for FavoriteIcon
     const [isDialogOpen, setIsDialogOpen] = useState(false); // State for Share Dialog
     const [animateFavorite, setAnimateFavorite] = useState(false); // Animation trigger state
-
+    const [linkCopied, setLinkCopied] = useState(false); // State for link copy feedback
+    
     // Handle Favorite Icon toggle
     const toggleFavorite = () => {
         setIsFavorite(!isFavorite);
@@ -56,7 +60,10 @@ function NewsCard({ newsItem }) {
                 break;
         }
     };
-
+    const handleCopyLink = () => {
+        navigator.clipboard.writeText(`${window.location.origin}/news`);
+        setLinkCopied(true); // Provide feedback after copying
+    };
     return (
         <div
             className="relative overflow-y-auto bg-gradient-to-r from-violet-300 to-lime-200 flex lg:flex-row flex-col justify-center items-center w-full lg:w-4/5 lg:ml-32 mx-auto rounded-2xl gap-10 min-h-[400px]"
@@ -164,25 +171,36 @@ function NewsCard({ newsItem }) {
                         color: '#374151',
                     }}
                 >
-                    <Button
-                        variant="outlined"
-                        color="primary"
-                        onClick={() => navigator.clipboard.writeText(`${window.location.origin}/news`)}
-                        sx={{
-                            textTransform: 'none',
-                            fontSize: '1rem',
-                            fontWeight: '500',
-                            padding: '10px 20px',
-                            borderColor: '#3b82f6',
-                            color: '#1e40af',
-                            '&:hover': {
-                                backgroundColor: '#dbeafe',
-                                borderColor: '#1e40af',
-                            },
+                    <div
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            width: '100%',
+                            border: '1px solid #d1d5db',
+                            borderRadius: '8px',
+                            padding: '5px 10px',
+                            backgroundColor: '#f3f4f6',
                         }}
                     >
-                        Copy Link
-                    </Button>
+                        <TextField
+                            fullWidth
+                            value={`${window.location.origin}/news`}
+                            InputProps={{
+                                readOnly: true,
+                                disableUnderline: true,
+                                style: { fontSize: '0.9rem', color: '#6b7280' },
+                            }}
+                        />
+                        <IconButton onClick={handleCopyLink}>
+                            <ContentCopyIcon sx={{ color: '#6b7280' }} />
+                        </IconButton>
+                    </div>
+                    {linkCopied && (
+                        <Typography sx={{ fontSize: '0.8rem', color: 'green' }}>
+                            Link copied to clipboard!
+                        </Typography>
+                    )}
                     <Typography sx={{ fontSize: '0.9rem', color: '#6b7280' }}>Or share directly on:</Typography>
                     <div className="flex gap-4 mt-2">
                         <IconButton onClick={() => handleShare('whatsapp')}>

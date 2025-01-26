@@ -83,9 +83,9 @@ const EventCard = ({ title, date, description, image, link }) => {
           sx={{
             fontSize: '1.8rem',
             fontWeight: 'bold',
-            color: '#0047AB',
+            color: '#000000',
             textAlign: 'center',
-            borderBottom: '2px solid #0047AB',
+
             paddingBottom: '10px',
           }}
         >
@@ -95,7 +95,7 @@ const EventCard = ({ title, date, description, image, link }) => {
           dividers
           sx={{
             padding: '20px',
-            color: '#333',
+            color: '#000000',
             fontSize: '1rem',
             fontFamily: 'Arial, sans-serif',
             backgroundColor: '#F9FAFB',
@@ -119,17 +119,24 @@ const EventCard = ({ title, date, description, image, link }) => {
             justifyContent: 'center',
             padding: '20px',
             backgroundColor: '#EEF5FF',
-            borderTop: '2px solid #0047AB',
+            display: 'flex',
+            gap: '70px', // Adds space between the buttons
           }}
         >
           <Button
             onClick={handleClose}
+            variant="outlined"
             sx={{
-              backgroundColor: '#FF4F4F',
-              color: '#fff',
+              backgroundColor: '#fffff',
+              color: '#000000',
               fontWeight: 'bold',
+              borderRadius: '8px', // Rounded corners
+              padding: '10px 20px',
+              transition: 'transform 0.3s ease, box-shadow 0.3s ease',
               '&:hover': {
-                backgroundColor: '#E03E3E',
+                backgroundColor: '#FF4F4F',
+                boxShadow: '0 4px 15px rgba(200, 100, 100, 0.4)',
+                transform: 'scale(1.05)',
               },
             }}
           >
@@ -138,12 +145,18 @@ const EventCard = ({ title, date, description, image, link }) => {
           {link && (
             <Button
               onClick={() => window.open(link, '_blank')}
+              variant="outlined"
               sx={{
-                backgroundColor: '#0047AB',
-                color: '#fff',
+                backgroundColor: '#fffff',
+                color: '#000000',
                 fontWeight: 'bold',
+                borderRadius: '8px', // Rounded corners
+                padding: '10px 20px',
+                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                 '&:hover': {
-                  backgroundColor: '#003380',
+                  backgroundColor: '#1565C0',
+                  boxShadow: '0 4px 15px rgba(25, 118, 210, 0.4)',
+                  transform: 'scale(1.05)',
                 },
               }}
             >

@@ -1,5 +1,5 @@
 import React from 'react'
-import { members,events } from "../utility/TeamData";
+import { members,events, newsData } from "../utility/TeamData";
 import ManageTeam from './ManageTeam';
 
 
@@ -33,7 +33,7 @@ function Overview() {
             <div className="bg-yellow-200 text-black p-4 rounded-full shadow hover:scale-105 transition-transform duration-300 ease-in-out">
                 <h3 className="text-lg font-semibold text-center">Currently Active News</h3>
                 <br />
-                <p className="text-2xl text-center">2</p>
+                <p className="text-2xl text-center">{newsData.length}</p>
             </div>
         </div>
     </div>

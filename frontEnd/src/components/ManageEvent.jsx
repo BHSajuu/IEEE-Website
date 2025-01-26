@@ -51,10 +51,10 @@ const ManageEvent = () => {
   };
 
   return (
-    <main className="p-6 flex flex-col justify-center items-center max-h-screen overflow-y-auto">
-      <div className="mt-64 max-w-5xl w-full bg-gray-300 shadow-lg rounded-lg p-4 mb-6">
+    <main className="p-4 sm:p-6 flex flex-col  items-center min-h-screen ">
+      <div className=" max-w-5xl w-full bg-gray-300 shadow-lg rounded-lg p-4 mb-6">
         <h2 className="text-xl font-semibold mb-4">Add New Event</h2>
-        <div className="w-full max-h-screen overflow-y-auto">
+       
           <form onSubmit={handleClick}>
             <div className="grid gap-4">
               <div className="flex flex-col space-y-1.5">
@@ -121,6 +121,7 @@ const ManageEvent = () => {
                     Date
                   </label>
                   <input
+                  type="date"
                     id="date"
                     value={currEvent.date}
                     onChange={(e) =>
@@ -142,7 +143,7 @@ const ManageEvent = () => {
               </button>
             </div>
           </form>
-        </div>
+       
       </div>
 
       <div className="w-full h-[2px] bg-gray-400 my-2 "></div>
