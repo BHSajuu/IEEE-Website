@@ -158,7 +158,7 @@ const Dashboard = () => {
       <div className="flex-1 flex flex-col w-full max-h-screen overflow-y-auto">
         {/* Top Navigation */}
         <header className="bg-slate-400 shadow px-4 py-3 flex justify-between items-center">
-        {/* Hamburger Icon for Mobile */}
+          {/* Hamburger Icon for Mobile */}
           <button
             onClick={toggleMenu}
             className="md:hidden text-custom-color4 focus:outline-none"
@@ -166,7 +166,6 @@ const Dashboard = () => {
             <MenuIcon />
           </button>
         </header>
-      
 
         {/* Overview */}
         {activeComponent === "overview" && <Overview />}
@@ -175,9 +174,9 @@ const Dashboard = () => {
         {activeComponent === "ManageTeam" && <ManageTeam />}
 
         {/* Manage Events */}
-       <div className="w-full overflow-y-auto">
-       {activeComponent === "ManageEvents" && <ManageEvent />}
-       </div>
+        <div className="w-full overflow-y-auto">
+          {activeComponent === "ManageEvents" && <ManageEvent />}
+        </div>
         {/* Manage News */}
         {activeComponent === "news" && <ManageNews />}
       </div>

@@ -1,11 +1,21 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Ping from "./Animation/ping";
 const Header = () => {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const isActive = (path) => location.pathname === path;
+
+  const handleAdminDashboardClick = () => {
+    // Simple auth check; adjust as necessary
+    if (localStorage.getItem("isAuthenticated") === "true") {
+      navigate("/dashboard");
+    } else {
+      navigate("/sign");
+    }
+  };
 
   return (
     <div className="fixed top-0 w-full z-10 bg-dark-2 text-indigo-100 p-4 shadow-lg">
@@ -55,15 +65,15 @@ const Header = () => {
             Home
           </a>
           <a
-            href="/section"
+            href="/exhibit"
             style={
-              isActive("/section")
+              isActive("/exhibit")
                 ? { textDecoration: "underline", textUnderlineOffset: "6px" }
                 : {}
             }
             className="block lg:inline mx-4 my-2 p-1 lg:my-0 hover:bg-custom-blue hover:text-black hover:scale-105 hover:rounded-lg  transition-transform duration-300 ease-in-out"
           >
-            Section
+            Exhibit
           </a>
 
           <a
@@ -80,7 +90,6 @@ const Header = () => {
               <Ping />
             </span>
           </a>
-
 
           <a
             href="/events"
@@ -116,13 +125,8 @@ const Header = () => {
             Contact Us
           </a>
           <a
-            href="/dashboard"
-            style={
-              isActive("/dashboard")
-                ? { textDecoration: "underline", textUnderlineOffset: "6px" }
-                : {}
-            }
-            className="block lg:inline mx-4 my-2 p-1  lg:my-0 hover:bg-custom-blue  hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out"
+            onClick={handleAdminDashboardClick}
+            className="cursor-pointer block lg:inline mx-4 my-2 p-1  lg:my-0 hover:bg-custom-blue  hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out"
           >
             Admin Dashboard
           </a>
@@ -159,7 +163,10 @@ const Header = () => {
                 href="/"
                 style={
                   isActive("/")
-                    ? { textDecoration: "underline", textUnderlineOffset: "6px" }
+                    ? {
+                        textDecoration: "underline",
+                        textUnderlineOffset: "6px",
+                      }
                     : {}
                 }
                 className="block text-lg text-gray-800 hover:font-bold"
@@ -167,21 +174,27 @@ const Header = () => {
                 Home
               </a>
               <a
-                href="/section"
+                href="/exhibit"
                 style={
-                  isActive("/section")
-                    ? { textDecoration: "underline", textUnderlineOffset: "6px" }
+                  isActive("/exhibit")
+                    ? {
+                        textDecoration: "underline",
+                        textUnderlineOffset: "6px",
+                      }
                     : {}
                 }
                 className="block text-lg text-gray-800 hover:font-bold"
               >
-                Section
+                Exhibit
               </a>
               <a
                 href="/events"
                 style={
                   isActive("/events")
-                    ? { textDecoration: "underline", textUnderlineOffset: "6px" }
+                    ? {
+                        textDecoration: "underline",
+                        textUnderlineOffset: "6px",
+                      }
                     : {}
                 }
                 className="block text-lg text-gray-800 hover:font-bold"
@@ -193,7 +206,10 @@ const Header = () => {
                 href="/news"
                 style={
                   isActive("/news")
-                    ? { textDecoration: "underline", textUnderlineOffset: "6px" }
+                    ? {
+                        textDecoration: "underline",
+                        textUnderlineOffset: "6px",
+                      }
                     : {}
                 }
                 className="block text-lg text-gray-800 hover:font-bold"
@@ -205,7 +221,10 @@ const Header = () => {
                 href="/team"
                 style={
                   isActive("/team")
-                    ? { textDecoration: "underline", textUnderlineOffset: "6px" }
+                    ? {
+                        textDecoration: "underline",
+                        textUnderlineOffset: "6px",
+                      }
                     : {}
                 }
                 className="block text-lg text-gray-800 hover:font-bold"
@@ -216,7 +235,10 @@ const Header = () => {
                 href="/contact"
                 style={
                   isActive("/contact")
-                    ? { textDecoration: "underline", textUnderlineOffset: "6px" }
+                    ? {
+                        textDecoration: "underline",
+                        textUnderlineOffset: "6px",
+                      }
                     : {}
                 }
                 className="block text-lg text-gray-800 hover:font-bold"
@@ -227,7 +249,10 @@ const Header = () => {
                 href="/dashboard"
                 style={
                   isActive("/dashboard")
-                    ? { textDecoration: "underline", textUnderlineOffset: "6px" }
+                    ? {
+                        textDecoration: "underline",
+                        textUnderlineOffset: "6px",
+                      }
                     : {}
                 }
                 className="block text-lg text-gray-800 hover:font-bold"
