@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useState } from "react";
 import ReadMoreIcon from "@mui/icons-material/ReadMore";
 import { motion } from "framer-motion";
 const Card = lazy(() => import("../components/card"));
@@ -11,51 +11,46 @@ const Home = () => {
     "Welcome to the official website of the IEEE Silchar Subsection. IEEE Silchar Subsection came into existence on 26th June 2021 with great efforts from the IEEE community at NIT Silchar and other IEEE Members from the North-Eastern India region. IEEE Silchar Subsection will have geographical reach over higher educational institutions in Assam, Tripura, Mizoram, Manipur, and Nagaland states of the North-Eastern Part of India in respect of activities of IEEE. The subsection works for creating opportunity and space in the line of IEEE mandate to advance technology for the benefit of humanity. The subsection looks at various technical activities, including facilitating Technical Co-Sponsorship for Conferences, Conducting Workshops, Technical Seminars, Distinguished Lecture programs, Colloquiums, and other possible technical activities. The subsection is actively engaged in bringing student members into various activities through the student chapters.";
 
   // Animation Variants for Word-by-Word Animation
-  const wordVariant = {
-    hidden: { opacity: 0, y: 10 },
-    visible: (i) => ({
-      opacity: 1,
-      y: 0,
-      transition: { delay: i * 0.1, duration: 0.4 },
-    }),
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleExpand = () => {
+    setIsExpanded(!isExpanded);
   };
+  
+  const fullText =
+  "Welcome to the official website of the IEEE Silchar Subsection. IEEE Silchar Subsection came into existence on 26th June 2021 with great efforts from the IEEE community at NIT Silchar and other IEEE Members from the North-Eastern India region. IEEE Silchar Subsection will have geographical reach over higher educational institutions in Assam, Tripura, Mizoram, Manipur, and Nagaland states of the North-Eastern Part of India in respect of activities of IEEE. The subsection works for creating opportunity and space in the line of IEEE mandate to advance technology for the benefit of humanity. The subsection looks at various technical activities, including facilitating Technical Co-Sponsorship for Conferences, Conducting Workshops, Technical Seminars, Distinguished Lecture programs, Colloquiums, and other possible technical activities. The subsection is actively engaged in bringing student members into various activities through the student chapters.";
+
+  const shortText = fullText.split(" ").slice(0, 30).join(" ") + "...";
+  
 
   return (
-    <main>
+    <main className="bg-gradient-to-r from-[#ecf4ff] to-[#5f7cb7]">
       <section className="mt-20 relative flex flex-col lg:flex-row  justify-between items-center max-w-7xl mx-auto p-6 gap-8">
         {/* Left Content */}
         <div className="flex-1">
           {/* Heading Animation */}
-          <h1 className="text-4xl  lg:text-5xl font-bold text-gray-900 leading-tight mb-4">
-            {headingText.split(" ").map((word, index) => (
-              <motion.span
-                key={index}
-                variants={wordVariant}
-                initial="hidden"
-                animate="visible"
-                custom={index}
-                className="inline-block mr-2"
-              >
-                {word}
-              </motion.span>
-            ))}
+          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4">
+            About IEEE Silchar Subsection
           </h1>
 
-          {/* Paragraph Animation */}
-          <p className="text-gray-600 text-lg leading-relaxed">
-            {paragraphText.split(" ").map((word, index) => (
-              <motion.span
-                key={index}
-                variants={wordVariant}
-                initial="hidden"
-                animate="visible"
-                custom={index}
-                className="inline-block mr-1"
-              >
-                {word}
-              </motion.span>
-            ))}
-          </p>
+          <motion.p
+            className="text-gray-600 text-lg leading-relaxed cursor-pointer"
+            initial={{ opacity: 0.8 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            {isExpanded ? fullText : shortText}
+          </motion.p>
+
+          <motion.span
+            className="text-blue-500 mt-2 inline-flex items-center cursor-pointer font-semibold"
+            onClick={toggleExpand}
+            whileHover={{ scale: 1.1 }}
+            transition={{ duration: 0.2 }}
+          >
+            {isExpanded ? "Read Less" : "Read More"}
+            <ReadMoreIcon className="ml-1" />
+          </motion.span>
         </div>
 
         {/* Right Content */}
@@ -152,8 +147,8 @@ const Home = () => {
       </div>
 
       <div className="w-full h-[2px] bg-gray-400 my-2"></div>
-      <div>
-        <h2 className="text-xl font-semibold text-custom-blue2 text-center mx-auto my-4">
+      <div className="w-full min-h-[600px] ">
+        <h2 className="text-xl font-semibold text-custom-blue2 text-center mx-auto mb-10">
           Upcoming Events
         </h2>
         <SlidingCards />

@@ -7,7 +7,7 @@ const Events = () => {
   
 
   return (
-    <div className="mt-20 p-6 bg-gray-50">
+    <div className="mt-20 p-6 bg-gradient-to-r from-[#ecf4ff] to-[#5f7cb7]">
       <h2 className="text-3xl font-bold text-black">Upcoming Events</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-y-20 lg:ml-2 gap-x-20 mt-6">
         {events.map((event, index) => (

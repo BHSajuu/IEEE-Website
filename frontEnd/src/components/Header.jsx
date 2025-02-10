@@ -64,17 +64,7 @@ const Header = () => {
           >
             Home
           </a>
-          <a
-            href="/exhibit"
-            style={
-              isActive("/exhibit")
-                ? { textDecoration: "underline", textUnderlineOffset: "6px" }
-                : {}
-            }
-            className="block lg:inline mx-4 my-2 p-1 lg:my-0 hover:bg-custom-blue hover:text-black hover:scale-105 hover:rounded-lg  transition-transform duration-300 ease-in-out"
-          >
-            Exhibit
-          </a>
+         
 
           <a
             href="/news"
@@ -102,6 +92,19 @@ const Header = () => {
           >
             Events
           </a>
+          
+          <a
+            href="/exhibit"
+            style={
+              isActive("/exhibit")
+                ? { textDecoration: "underline", textUnderlineOffset: "6px" }
+                : {}
+            }
+            className="block lg:inline mx-4 my-2 p-1 lg:my-0 hover:bg-custom-blue hover:text-black hover:scale-105 hover:rounded-lg  transition-transform duration-300 ease-in-out"
+          >
+            Exhibit
+          </a>
+
           <a
             href="/team"
             style={

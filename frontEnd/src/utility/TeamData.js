@@ -1,48 +1,48 @@
 const members = [
-    { name: 'xyz', position: 'President', year: "4th", image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqnI-U4PmhOmaaGJ_Cs4FJJCHSN8OCECA5jw&s/150' ,link:'https://www.linkedin.com'},
-    { name: 'abc', position: 'Secretary',  year: "4th", image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7QGgimkc7qkXiLMPTRH-_-SeS7ggKX5wr5Q&s/150' ,link:'https://www.linkedin.com'},
-    { name: 'xyz', position: 'President', year: "4th", image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqnI-U4PmhOmaaGJ_Cs4FJJCHSN8OCECA5jw&s/150' ,link:'https://www.linkedin.com' },
-    { name: 'abc', position: 'Secretary',  year: "4th", image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7QGgimkc7qkXiLMPTRH-_-SeS7ggKX5wr5Q&s/150' ,link:'https://www.linkedin.com'},
-    { name: 'xyz', position: 'President', year: "4th", image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqnI-U4PmhOmaaGJ_Cs4FJJCHSN8OCECA5jw&s/150' ,link:'https://www.linkedin.com'},
-    { name: 'abc', position: 'Secretary',  year: "4th", image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7QGgimkc7qkXiLMPTRH-_-SeS7ggKX5wr5Q&s/150' ,link:'https://www.linkedin.com'},
-    { name: 'xyz', position: 'President', year: "4th", image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqnI-U4PmhOmaaGJ_Cs4FJJCHSN8OCECA5jw&s/150' ,link:'https://www.linkedin.com'},
-    { name: 'abc', position: 'Secretary',  year: "4th", image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7QGgimkc7qkXiLMPTRH-_-SeS7ggKX5wr5Q&s/150',link:'https://www.linkedin.com' },
-    { name: 'xyz', position: 'President', year: "4th", image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqnI-U4PmhOmaaGJ_Cs4FJJCHSN8OCECA5jw&s/150' ,link:'https://www.linkedin.com'},
-    { name: 'abc', position: 'Secretary',  year: "4th", image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7QGgimkc7qkXiLMPTRH-_-SeS7ggKX5wr5Q&s/150' ,link:'https://www.linkedin.com'},
+    {id: 1, name: 'xyz', position: 'President', year: "4th", image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqnI-U4PmhOmaaGJ_Cs4FJJCHSN8OCECA5jw&s/150' ,link:'https://www.linkedin.com'},
+    {id:2, name: 'abc', position: 'Secretary',  year: "4th", image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7QGgimkc7qkXiLMPTRH-_-SeS7ggKX5wr5Q&s/150' ,link:'https://www.linkedin.com'},
+    {id:3, name: 'xyz', position: 'President', year: "4th", image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqnI-U4PmhOmaaGJ_Cs4FJJCHSN8OCECA5jw&s/150' ,link:'https://www.linkedin.com' },
+    {id:4,  name: 'abc', position: 'Secretary',  year: "4th", image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7QGgimkc7qkXiLMPTRH-_-SeS7ggKX5wr5Q&s/150' ,link:'https://www.linkedin.com'},
+    {id:5, name: 'xyz', position: 'President', year: "4th", image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqnI-U4PmhOmaaGJ_Cs4FJJCHSN8OCECA5jw&s/150' ,link:'https://www.linkedin.com'},
+    {id:6, name: 'abc', position: 'Secretary',  year: "4th", image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7QGgimkc7qkXiLMPTRH-_-SeS7ggKX5wr5Q&s/150' ,link:'https://www.linkedin.com'},
+    {id:7, name: 'xyz', position: 'President', year: "4th", image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqnI-U4PmhOmaaGJ_Cs4FJJCHSN8OCECA5jw&s/150' ,link:'https://www.linkedin.com'},
+    {id:8, name: 'abc', position: 'Secretary',  year: "4th", image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7QGgimkc7qkXiLMPTRH-_-SeS7ggKX5wr5Q&s/150',link:'https://www.linkedin.com' },
+    {id:9, name: 'xyz', position: 'President', year: "4th", image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqnI-U4PmhOmaaGJ_Cs4FJJCHSN8OCECA5jw&s/150' ,link:'https://www.linkedin.com'},
+    {id:10, name: 'abc', position: 'Secretary',  year: "4th", image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7QGgimkc7qkXiLMPTRH-_-SeS7ggKX5wr5Q&s/150' ,link:'https://www.linkedin.com'},
   ];
 
   
 
   const events = [
-    {
+    {   id: 1,
         image: './assets/eventImage1.jpg',
         title: 'Tech Talk',
         date: 'Jan 15, 2024',
         description: 'A talk on emerging technologies. '.repeat(50),
         link: 'https://www.linkedin.com'
     },
-    {
+    {   id: 2,
         image: './assets/eventImage2.jpg',
         title: 'Hackathon',
         date: 'Feb 10, 2024',
         description: '24-hour coding event. '.repeat(50),
         link: 'https://www.linkedin.com'
     },
-    {
+    {   id: 3,
         image: './assets/eventImage3.jpg',
         title: 'Tech Talk',
         date: 'Jan 15, 2024',
         description: 'A talk on emerging technologies Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur quod distinctio numquam, animi laboriosam quaerat libero cumque incidunt vitae ratione sapiente? A, perspiciatis. Sapiente voluptate autem incidunt dolores saepe voluptates. Inventore aliquam aut maxime nihil nostrum eveniet nobis veritatis earum illum veniam excepturi dicta, enim eligendi amet deleniti totam repudiandae voluptatibus sint ipsa cupiditate numquam voluptatum autem? Impedit, cum libero. Modi autem amet ut vitae, nulla consequatur dolore! Eos, sint quaerat numquam laudantium nobis debitis expedita consectetur aperiam minima. Officiis expedita, modi doloremque quos dignissimos quaerat asperiores debitis sapiente hic! '.repeat(50),
         link: 'https://www.linkedin.com'
     },
-    {
+    {   id: 4,
         image: './assets/eventImage4.jpg',
         title: 'Hackathon',
         date: 'Feb 10, 2024',
         description: '24-hour coding event. '.repeat(50),
         link: 'https://www.linkedin.com'
     },
-    {
+    {   id: 5,
         image: './assets/eventImage5.jpg',
         title: 'Tech Talk',
         date: 'Jan 15, 2024',
@@ -53,19 +53,19 @@ const members = [
 
   
   const oldEvents = [
-    { image:'./assets/eventImage1.jpg', title: 'Tech Talk', date: 'Jan 15, 2024', description: 'A talk on emerging technologies.' },
-    { image:'./assets/eventImage2.jpg', title: 'Hackathon', date: 'Feb 10, 2024', description: '24-hour coding event.' },
-    { image:'./assets/eventImage3.jpg', title: 'Tech Talk', date: 'Jan 15, 2024', description: 'A talk on emerging technologies Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur quod distinctio numquam, animi laboriosam quaerat libero cumque incidunt vitae ratione sapiente? A, perspiciatis. Sapiente voluptate autem incidunt dolores saepe voluptates.Inventore aliquam aut maxime nihil nostrum eveniet nobis veritatis earum illum veniam excepturi dicta, enim eligendi amet deleniti totam repudiandae voluptatibus sint ipsa cupiditate numquam voluptatum autem? Impedit, cum libero. Modi autem amet ut vitae, nulla consequatur dolore! Eos, sint quaerat numquam laudantium nobis debitis expedita consectetur aperiam minima. Officiis expedita, modi doloremque quos dignissimos quaerat asperiores debitis sapiente hic!.' },
-    { image:'./assets/eventImage4.jpg', title: 'Hackathon', date: 'Feb 10, 2024', description: '24-hour coding event.' },
-    { image:'./assets/eventImage5.jpg', title: 'Tech Talk', date: 'Jan 15, 2024', description: 'A talk on emerging technologies.' },
+    {id: 1, image:'./assets/eventImage1.jpg', title: 'Tech Talk', date: 'Jan 15, 2024', description: 'A talk on emerging technologies.' },
+    {id:2, image:'./assets/eventImage2.jpg', title: 'Hackathon', date: 'Feb 10, 2024', description: '24-hour coding event.' },
+    {id:3, image:'./assets/eventImage3.jpg', title: 'Tech Talk', date: 'Jan 15, 2024', description: 'A talk on emerging technologies Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur quod distinctio numquam, animi laboriosam quaerat libero cumque incidunt vitae ratione sapiente? A, perspiciatis. Sapiente voluptate autem incidunt dolores saepe voluptates.Inventore aliquam aut maxime nihil nostrum eveniet nobis veritatis earum illum veniam excepturi dicta, enim eligendi amet deleniti totam repudiandae voluptatibus sint ipsa cupiditate numquam voluptatum autem? Impedit, cum libero. Modi autem amet ut vitae, nulla consequatur dolore! Eos, sint quaerat numquam laudantium nobis debitis expedita consectetur aperiam minima. Officiis expedita, modi doloremque quos dignissimos quaerat asperiores debitis sapiente hic!.' },
+    {id:4, image:'./assets/eventImage4.jpg', title: 'Hackathon', date: 'Feb 10, 2024', description: '24-hour coding event.' },
+    {id:5, image:'./assets/eventImage5.jpg', title: 'Tech Talk', date: 'Jan 15, 2024', description: 'A talk on emerging technologies.' },
   ];
 
   const NewEvents = [
-    {delete:true, image:'./assets/eventImage1.jpg', title: 'Tech Talk', date: 'Jan 15, 2024', description: 'A talk on emerging technologies.' ,link:'https://www.linkedin.com'},
-    {delete:true, image:'./assets/eventImage2.jpg', title: 'Hackathon', date: 'Feb 10, 2024', description: '24-hour coding event.',link:'https://www.linkedin.com' },
-    {delete:true, image:'./assets/eventImage3.jpg', title: 'Tech Talk', date: 'Jan 15, 2024', description: 'A talk on emerging technologies Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur quod distinctio numquam, animi laboriosam quaerat libero cumque incidunt vitae ratione sapiente? A, perspiciatis. Sapiente voluptate autem incidunt dolores saepe voluptates.Inventore aliquam aut maxime nihil nostrum eveniet nobis veritatis earum illum veniam excepturi dicta, enim eligendi amet deleniti totam repudiandae voluptatibus sint ipsa cupiditate numquam voluptatum autem? Impedit, cum libero. Modi autem amet ut vitae, nulla consequatur dolore! Eos, sint quaerat numquam laudantium nobis debitis expedita consectetur aperiam minima. Officiis expedita, modi doloremque quos dignissimos quaerat asperiores debitis sapiente hic!.' ,link:'https://www.linkedin.com'},
-    {delete:true, image:'./assets/eventImage4.jpg', title: 'Hackathon', date: 'Feb 10, 2024', description: '24-hour coding event.' ,link:'https://www.linkedin.com'},
-    {delete:true, image:'./assets/eventImage5.jpg', title: 'Tech Talk', date: 'Jan 15, 2024', description: 'A talk on emerging technologies.' ,link:'https://www.linkedin.com'}
+    {id:1, delete:true, image:'./assets/eventImage1.jpg', title: 'Tech Talk', date: 'Jan 15, 2024', description: 'A talk on emerging technologies.' ,link:'https://www.linkedin.com'},
+    {id:2, delete:true, image:'./assets/eventImage2.jpg', title: 'Hackathon', date: 'Feb 10, 2024', description: '24-hour coding event.',link:'https://www.linkedin.com' },
+    {id:3, delete:true, image:'./assets/eventImage3.jpg', title: 'Tech Talk', date: 'Jan 15, 2024', description: 'A talk on emerging technologies Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur quod distinctio numquam, animi laboriosam quaerat libero cumque incidunt vitae ratione sapiente? A, perspiciatis. Sapiente voluptate autem incidunt dolores saepe voluptates.Inventore aliquam aut maxime nihil nostrum eveniet nobis veritatis earum illum veniam excepturi dicta, enim eligendi amet deleniti totam repudiandae voluptatibus sint ipsa cupiditate numquam voluptatum autem? Impedit, cum libero. Modi autem amet ut vitae, nulla consequatur dolore! Eos, sint quaerat numquam laudantium nobis debitis expedita consectetur aperiam minima. Officiis expedita, modi doloremque quos dignissimos quaerat asperiores debitis sapiente hic!.' ,link:'https://www.linkedin.com'},
+    {id:4, delete:true, image:'./assets/eventImage4.jpg', title: 'Hackathon', date: 'Feb 10, 2024', description: '24-hour coding event.' ,link:'https://www.linkedin.com'},
+    {id:5, delete:true, image:'./assets/eventImage5.jpg', title: 'Tech Talk', date: 'Jan 15, 2024', description: 'A talk on emerging technologies.' ,link:'https://www.linkedin.com'}
   ];
 
 

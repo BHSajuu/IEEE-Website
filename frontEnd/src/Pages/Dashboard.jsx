@@ -25,7 +25,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="mt-20 flex flex-col md:flex-row max-h-screen bg-gray-10 overflow-hidden">
+    <div className="mt-20 flex flex-col md:flex-row max-h-screen bg-gradient-to-r from-[#ecf4ff] to-[#5f7cb7] overflow-hidden">
       {/* Sidebar (visible only on laptop screens and above) */}
       <aside className="hidden md:block w-64 bg-custom-color4 text-white max-h-screen flex-col">
         <div className="p-4 text-center text-xl font-bold">Admin Dashboard</div>

@@ -1,14 +1,11 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import FavoriteBorderRounded from "@mui/icons-material/FavoriteBorderRounded";
-import Share from "@mui/icons-material/Share";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
+
 
 const exhibitData = {
   1: {
@@ -52,7 +49,7 @@ const ExhibitDetails = () => {
   }
 
   return (
-    <div className="p-6 mt-20">
+    <div className="p-6 mt-20 bg-gradient-to-r from-[#ecf4ff] to-[#5f7cb7]">
       <Card
         sx={{
           maxWidth: 1000,

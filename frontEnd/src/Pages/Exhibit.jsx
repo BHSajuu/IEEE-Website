@@ -61,7 +61,7 @@ const Exhibit = () => {
 
   return (
     <div
-      className="p-6 flex flex-wrap justify-evenly gap-4 mt-16  max-w-full"
+      className="p-6 flex flex-wrap justify-evenly gap-4 mt-16  max-w-full bg-gradient-to-r from-[#ecf4ff] to-[#5f7cb7]"
       style={{ paddingTop: "4rem" }}
     >
       {exhibitData.map((exhibit) => (

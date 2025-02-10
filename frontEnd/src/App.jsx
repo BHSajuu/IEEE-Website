@@ -11,6 +11,7 @@ import Dashboard from "./Pages/Dashboard";
 import News from "./Pages/News";
 import ExhibitDetails from "./Pages/ExhibitDetails";
 import SignIn from "./components/SignInPage";
+import Loader from "./components/Loader";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/news" element={<News />} />
         <Route path="/sign" element={<SignIn />} />
+        <Route path="/loader" element={<Loader />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </main>

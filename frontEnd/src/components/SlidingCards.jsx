@@ -23,13 +23,13 @@ const SlidingCards = () => {
         slidesToShow: 3, // Keep the number of slides constant
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 1000,
         pauseOnHover: true,
         beforeChange: (_, next) => setCurrentSlide(next), // Update the active slide index on slide change
     };
 
     return (
-        <div className="w-full max-w-screen-xl mx-auto mt-4 mb-7">
+        <div className="w-full max-w-screen-xl mx-auto   mb-7 ">
             <Slider {...settings}>
                 {events.map((e, index) => {
                     // Calculate the middle slide index
@@ -41,7 +41,7 @@ const SlidingCards = () => {
                             key={e.id}
                             className={`h-[350px] sm:h-[300px] md:h-[400px] lg:h-[450px] rounded-xl mb-5 bg-gray-200 p-2 sm:p-3 lg:p-4 pb-2 shadow-md transition-transform duration-300 ease-in-out ${
                                 isActive
-                                    ? "opacity-100 scale-105" // Full opacity and zoom for the center slide
+                                    ? "opacity-100 scale-105 " // Full opacity and zoom for the center slide
                                     : "opacity-50 scale-90" // Reduced opacity and scale for others
                             }`}
                         >
