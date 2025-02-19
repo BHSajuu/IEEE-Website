@@ -78,7 +78,7 @@ app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
 app.use('/auth', authRouter);
-app.use('/events', eventRouter);
+app.use('api/events', eventRouter);
 app.use('/upload', coverPictureRouter);
 app.use('/files', express.static(path.join(__dirname, 'uploads')));
 

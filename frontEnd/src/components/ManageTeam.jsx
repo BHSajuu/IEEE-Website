@@ -1,48 +1,81 @@
-import React, { useState } from "react";
-import {members} from "../utility/TeamData";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import Loader from "./Loader";
 
 function ManageTeam() {
-    // Initialize the teamMembers state with the imported members data
-    const [teamMembers, setTeamMembers] = useState(members);
+  const [teamMembers, setTeamMembers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [newMember, setNewMember] = useState({ 
+    name: "", 
+    role: "", 
+    year: "", 
+    image: "", 
+    link: "" 
+  });
 
-    const [newMember, setNewMember] = useState({ name: "", role: "", year: "", image: "", link: "" });
-
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = () => {
-                setNewMember({ ...newMember, image: reader.result });
-            };
-            reader.readAsDataURL(file);
-        }
+  useEffect(() => {
+    const fetchTeam = async () => {
+      try {
+        const response = await axios.get('/api/team');
+        setTeamMembers(response.data.data || []);
+      } catch (error) {
+        toast.error('Failed to load team members');
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
     };
+    fetchTeam();
+  }, []);
 
-    const handleAddMember = () => {
-        if (newMember.name && newMember.role) {
-            const updatedMembers = [
-                ...teamMembers,
-                { id: Date.now(), ...newMember },  // Adding new member with a unique ID
-            ];
-            setTeamMembers(updatedMembers);
-            // Also updating the external 'members' array
-            // (This assumes that 'members' can be mutated, otherwise you may need to handle this outside the component)
-            members.push({ id: Date.now(), ...newMember });
-            setNewMember({ name: "", role: "", year: "", image: "", link: "" });
-        } else {
-            alert("Please fill out all required fields!");
-        }
-    };
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setNewMember({ ...newMember, image: reader.result });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
-    const handleRemoveMember = (id) => {
-        const updatedMembers = teamMembers.filter((member) => member.id !== id);
-        setTeamMembers(updatedMembers);
-        // Remove member from the external 'members' array
-        const index = members.findIndex((member) => member.id === id);
-        if (index > -1) {
-            members.splice(index, 1);
+  const handleAddMember = async () => {
+   
+    try {
+      const response = await axios.post('/api/team', newMember);
+      setTeamMembers(prev => [...prev, response.data]);
+      setNewMember({ name: "", role: "", year: "", image: "", link: "" });
+      toast.success('Member added successfully');
+    } catch (error) {
+      let message = 'Failed to add member';
+      if (error.response && error.response.data) {
+        // Check for the error message in the `error` property
+        if (error.response.data.error) {
+          message = error.response.data.error;
+        } else if (error.response.data.errors && error.response.data.errors.length > 0) {
+          message = error.response.data.errors[0].msg;
+        } else if (error.response.data.message) {
+          message = error.response.data.message;
         }
-    };
+      }
+      toast.error(message);
+    }
+  };
+
+  const handleRemoveMember = async (id) => {
+    try {
+      await axios.delete(`/api/team/${id}`);
+      setTeamMembers(prev => prev.filter(member => member.id !== id));
+      toast.success('Member removed successfully');
+    } catch (error) {
+      toast.error('Failed to remove member');
+      console.error(error);
+    }
+  };
+
+  if (loading) return <Loader />;
+
 
     return (
         <div className="bg-white shadow rounded p-4 sm:max-h-screen overflow-y-auto ">

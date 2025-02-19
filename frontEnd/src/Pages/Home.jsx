@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useState } from "react";
+import React, {  lazy, useState } from "react";
 import ReadMoreIcon from "@mui/icons-material/ReadMore";
 import { motion } from "framer-motion";
 const Card = lazy(() => import("../components/card"));
@@ -125,9 +125,7 @@ const Home = () => {
               To be an essential resource for the professional development in
               specific fields of interest of IEEE for the benefit of mankind.
             </p>
-            <a href="/section" className="text-custom-blue2 flex items-center">
-              Read More <ReadMoreIcon className="ml-1" />
-            </a>
+            
           </div>
 
           {/* Mission Div */}
@@ -139,16 +137,14 @@ const Home = () => {
               To provide a platform for knowledge sharing, networking, and
               career development to the local technical community.
             </p>
-            <a href="section" className="text-custom-blue2 flex items-center">
-              Read More <ReadMoreIcon className="ml-1" />
-            </a>
+          
           </div>
         </div>
       </div>
 
       <div className="w-full h-[2px] bg-gray-400 my-2"></div>
       <div className="w-full min-h-[600px] ">
-        <h2 className="text-xl font-semibold text-custom-blue2 text-center mx-auto mb-10">
+        <h2 className="text-3xl font-semibold text-black text-center mx-auto mb-10">
           Upcoming Events
         </h2>
         <SlidingCards />

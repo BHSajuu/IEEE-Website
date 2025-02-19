@@ -1,6 +1,7 @@
 import { prisma } from '../lib/prisma.js';
 import { Router } from 'express';
 import { isAuthenticated, isAdmin } from '../middlewares/auth.js'; // Assuming you have this middleware for authentication
+import { upload, uploadImage } from '../utils/fileUpload.js';
 
 const eventRouter = Router();
 
@@ -29,11 +30,13 @@ eventRouter.get('/:eventId', async (req, res) => {
 });
 
 // Create a new event (Admins only)
-eventRouter.post('/create', isAuthenticated, isAdmin, async (req, res) => {
+eventRouter.post('/create', isAuthenticated, isAdmin,upload.single('image'), async (req, res) => {
     try {
-        const { title, description, image, lastUpdated } = req.body;
+        const { title, description, link,date } = req.body;
+         
+        const image = await uploadImage(req.file);
 
-        if (!title || !description || !image || !lastUpdated) {
+        if (!title || !description || !image || !dated || !link) {
             return res.status(400).send({ error: { message: 'All fields are required.' } });
         }
         const newEvent = await prisma.event.create({
@@ -41,7 +44,8 @@ eventRouter.post('/create', isAuthenticated, isAdmin, async (req, res) => {
                 title,
                 description,
                 image,
-                lastUpdated,
+                link,
+                date,
             },
         });
 

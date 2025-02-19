@@ -1,20 +1,42 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ReadMoreIcon from '@mui/icons-material/ReadMore';
-
-// Array of event data
-const events = [
-    { id: 1, title: "Event 1", image: "./assets/eventImage1.jpg", description: "Creating opportunity and space in the line of IEEE mandate to advance technology for the benefit of humanity. The subsection looks at various technical activities, including facilitating Technical Co-Sponsorship for Conferences, Conducting Workshops, Technical Seminars, Distinguished Lecture programs, Colloquiums, and other possible technical activities." },
-    { id: 2, title: "Event 2", image: "./assets/eventImage2.jpg", description: "This is event 2" },
-    { id: 3, title: "Event 3", image: "./assets/eventImage3.jpg", description: "This is event 3" },
-    { id: 4, title: "Event 4", image: "./assets/eventImage4.jpg", description: "This is event 4" },
-    { id: 5, title: "Event 5", image: "./assets/eventImage5.jpg", description: "This is event 5" },
-];
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import Loader from './Loader';
 
 const SlidingCards = () => {
+    const [events,setEvents] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [currentSlide, setCurrentSlide] = useState(0); // Tracks the currently active slide
+    
+
+    useEffect(()=>{
+        const fetchData = async()=>{
+            try {
+                const response = await axios.get("/api/events");
+                const currDate = new Date();
+                const upcoming =[];
+                response.data.data.forEach(event =>{
+                    const eventDate = new Date(event.date);
+                    if(eventDate >= currDate){
+                       upcoming.push(event);
+                    }
+                })
+                setEvents(upcoming);
+            } catch (error) {
+                toast.error("Fail to load data")
+                console.log(error);
+            }finally{
+                setLoading(false)
+            }
+        }
+        fetchData();
+    },[])
+  
+    if(loading) return <Loader/>;
 
     const settings = {
         dots: true,

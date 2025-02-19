@@ -11,7 +11,7 @@ import {
     DialogTitle,
     TextField,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CardActions from '@mui/material/CardActions';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
@@ -19,14 +19,39 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function NewsCard({ newsItem }) {
-    const [isFavorite, setIsFavorite] = useState(false); // State for FavoriteIcon
-    const [isDialogOpen, setIsDialogOpen] = useState(false); // State for Share Dialog
-    const [animateFavorite, setAnimateFavorite] = useState(false); // Animation trigger state
-    const [linkCopied, setLinkCopied] = useState(false); // State for link copy feedback
-    
+    const [isFavorite, setIsFavorite] = useState(false); 
+    const [isDialogOpen, setIsDialogOpen] = useState(false); 
+    const [animateFavorite, setAnimateFavorite] = useState(false); 
+    const [linkCopied, setLinkCopied] = useState(false);
+    const [showFullDescription, setShowFullDescription] = useState(false); // New state for description toggle
+
+    const [user, setUser] = useState(null);
+ 
+   const navigate = useNavigate();
+
+   useEffect(() => {
+     const token = localStorage.getItem("token");
+     if (!token) {
+      setUser(null);
+      return;
+     }
+    axios
+      .get("/api/auth/me", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => setUser(res.data))
+      .catch((error) => {
+        setUser(null);
+      });
+  }, [navigate]);
+
+
+
+
     // Handle Favorite Icon toggle
     const toggleFavorite = () => {
         setIsFavorite(!isFavorite);
@@ -64,6 +89,13 @@ function NewsCard({ newsItem }) {
         navigator.clipboard.writeText(`${window.location.origin}/news`);
         setLinkCopied(true); // Provide feedback after copying
     };
+    const formattedDate = new Date(newsItem.date).toLocaleDateString('en-IN', {
+        weekday: 'long',
+        day: 'numeric',  
+        month: 'long',   
+        year: 'numeric' 
+    });
+      
     return (
         <div
             className="relative overflow-y-auto bg-gradient-to-r from-violet-300 to-lime-200 flex lg:flex-row flex-col justify-center items-center w-full lg:w-4/5 lg:ml-32 mx-auto rounded-2xl gap-10 min-h-[400px]"
@@ -73,16 +105,30 @@ function NewsCard({ newsItem }) {
             <div className="w-full lg:w-4/5 min-h-[400px] flex flex-col gap-4 p-4">
                 <CardHeader
                     avatar={<Avatar alt="image" src={newsItem.avaterUrl} />}
-                    title={<Typography variant="h6">{newsItem.userName}</Typography>}
-                    subheader={newsItem.date}
+                    title={<Typography variant="h6">{user?.name}</Typography>}
+                    subheader={formattedDate}
                     className="text-black"
                 />
 
                 <div className="w-full h-[2px] bg-gray-400 my-2"></div>
 
                 <CardContent className="w-full min-h-52 flex flex-col gap-1">
-                    <p className="text-xl">{newsItem.title} :</p>
-                    <p>{newsItem.description}</p>
+                    <p className="text-xl font-serif">{newsItem.title} :</p>
+                    <p
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setShowFullDescription(!showFullDescription);
+                        }}
+                        style={{
+                            display: showFullDescription ? 'block' : '-webkit-box',
+                            WebkitBoxOrient: 'vertical',
+                            WebkitLineClamp: showFullDescription ? 'none' : 10,
+                            overflow: 'hidden',
+                            cursor: 'pointer',
+                        }}
+                    >
+                        {newsItem.description}
+                    </p>
 
                     {/* Image Section for small screens */}
                     <div className="lg:hidden flex justify-center items-center mt-4">

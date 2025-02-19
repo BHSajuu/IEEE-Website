@@ -8,11 +8,22 @@ import Button from '@mui/material/Button';
 
 const EventCard = ({ title, date, description, image, link }) => {
   const [open, setOpen] = useState(false);
-
+   
+  console.log(date);
+  
+  const formattedDate = new Date(date).toLocaleDateString('en-IN', {
+    weekday: 'long',
+    day: 'numeric',  
+    month: 'long',   
+    year: 'numeric' 
+  });
+  
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const descriptionElementRef = useRef(null);
+  
+  const fixedLink = link.startsWith('http') ? link : `https://${link}`;
 
   useEffect(() => {
     if (open) {
@@ -25,12 +36,12 @@ const EventCard = ({ title, date, description, image, link }) => {
 
   return (
     <div
-      className="bg-gradient-to-t from-[#EEF5FF] to-[#B4D4FF]  p-6 w-100 rounded-3xl shadow-2xl hover:shadow-xl transition-shadow duration-300 flex justify-center items-center gap-2 cursor-pointer"
-      onClick={handleOpen}
+    className="lg:w-[630px] lg:h-[212px] bg-gradient-to-t from-[#EEF5FF] to-[#B4D4FF] p-6 w-100 rounded-3xl shadow hover:shadow-[0_4px_15px_rgba(0,0,0,0.4)] transform transition-transform transition-shadow duration-300 hover:scale-105 flex justify-center items-center gap-2 cursor-pointer"
+    onClick={handleOpen}
     >
-      <div className="w-[300px]">
+      <div className="w-[300px] ">
         <h3 className="text-xl font-bold text-black">{title}</h3>
-        <p className="text-gray-500">{date}</p>
+        <p className="text-gray-500">{formattedDate}</p>
         <p
           className="mt-4 text-gray-700 overflow-hidden text-ellipsis line-clamp-2"
           title="Click for more details"
@@ -45,9 +56,9 @@ const EventCard = ({ title, date, description, image, link }) => {
           {description}
         </p>
         <br />
-        {link && (
+        {fixedLink && (
           <a
-            href={link}
+            href={fixedLink}
             className="text-pretty text-blue-700"
             onClick={(e) => e.stopPropagation()}
           >
@@ -55,7 +66,7 @@ const EventCard = ({ title, date, description, image, link }) => {
           </a>
         )}
       </div>
-      <div className="w-[300px]">
+      <div className="w-[300px] h-[170px]">
         <img
           src={image}
           alt="Not available"
@@ -72,6 +83,7 @@ const EventCard = ({ title, date, description, image, link }) => {
         onClick={(e) => e.stopPropagation()}
         sx={{
           '& .MuiPaper-root': {
+            width: '100vh',
             background: 'linear-gradient(135deg, #B4D4FF, #EEF5FF)',
             borderRadius: '20px',
             boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
@@ -85,7 +97,6 @@ const EventCard = ({ title, date, description, image, link }) => {
             fontWeight: 'bold',
             color: '#000000',
             textAlign: 'center',
-
             paddingBottom: '10px',
           }}
         >
@@ -101,6 +112,18 @@ const EventCard = ({ title, date, description, image, link }) => {
             backgroundColor: '#F9FAFB',
           }}
         >
+          {/* Image at the top */}
+          <img
+            src={image}
+            alt="Not available"
+            style={{
+              width: '100%',
+              maxHeight: '400px',
+              objectFit: 'cover',
+              borderRadius: '8px',
+              marginBottom: '20px',
+            }}
+          />
           <DialogContentText
             id="event-dialog-description"
             ref={descriptionElementRef}
@@ -142,9 +165,9 @@ const EventCard = ({ title, date, description, image, link }) => {
           >
             Cancel
           </Button>
-          {link && (
+          {fixedLink && (
             <Button
-              onClick={() => window.open(link, '_blank')}
+              onClick={() => window.open(fixedLink, '_blank')}
               variant="outlined"
               sx={{
                 backgroundColor: '#fffff',
@@ -169,4 +192,4 @@ const EventCard = ({ title, date, description, image, link }) => {
   );
 };
 
-export { EventCard };
+export default EventCard;

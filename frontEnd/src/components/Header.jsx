@@ -1,21 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Ping from "./Animation/ping";
-const Header = () => {
+import axios from "axios";
+  const Header = () => {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
-
+  const [user, setUser] = useState(null);
   const isActive = (path) => location.pathname === path;
+
+
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setUser(null);
+      return;
+    }
+    axios
+      .get("/api/auth/me", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => setUser(res.data))
+      .catch((error) => {
+        console.error(error);
+        setUser(null);
+      });
+  }, [navigate]);
 
   const handleAdminDashboardClick = () => {
     // Simple auth check; adjust as necessary
-    if (localStorage.getItem("isAuthenticated") === "true") {
-      navigate("/dashboard");
+    if (!user) {
+      navigate("/login");
     } else {
-      navigate("/sign");
+      navigate("/dashboard"); 
     }
   };
+
 
   return (
     <div className="fixed top-0 w-full z-10 bg-dark-2 text-indigo-100 p-4 shadow-lg">
@@ -33,7 +54,7 @@ const Header = () => {
         {/* Hamburger Menu (Mobile) */}
         <button
           onClick={() => setMenuOpen(true)}
-          className="lg:hidden block text-white focus:outline-none"
+          className="lg:hidden block text-white focus:outline-none mr-8"
         >
           <svg
             className="w-6 h-6"
@@ -129,9 +150,14 @@ const Header = () => {
           </a>
           <a
             onClick={handleAdminDashboardClick}
+            style={
+              isActive("/dashboard")
+                ? { textDecoration: "underline", textUnderlineOffset: "6px" }
+                : {}
+            }
             className="cursor-pointer block lg:inline mx-4 my-2 p-1  lg:my-0 hover:bg-custom-blue  hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out"
           >
-            Admin Dashboard
+          {user ?<p>Admin Dashboard</p> : <p>Login</p>}
           </a>
         </nav>
       </div>
@@ -249,7 +275,7 @@ const Header = () => {
                 Contact Us
               </a>
               <a
-                href="/dashboard"
+                onClick={handleAdminDashboardClick}
                 style={
                   isActive("/dashboard")
                     ? {
@@ -260,7 +286,7 @@ const Header = () => {
                 }
                 className="block text-lg text-gray-800 hover:font-bold"
               >
-                Admin Dashboard
+                 {user ?<p>Admin Dashboard</p> : <p>Login</p>}
               </a>
             </nav>
           </div>

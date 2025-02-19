@@ -1,11 +1,27 @@
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import NewsCard from '../components/NewsCard';
-import { newsData } from '../utility/TeamData';
+import axios from 'axios';
+import Loader from '../components/Loader';
 
 function News() {
+  const [news, setNews] = useState([]);
+  const [loading, setLoading] = useState(true);
+ 
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const response = await axios.get('/api/news');
+        setNews(response.data.data || []);
+      } catch (error) {
+        console.error('Error fetching news:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchNews();
+  }, []);
 
-
+  if (loading) return <Loader />;
 
   return (
     <main className='mt-20 bg-gradient-to-r from-gray-700 to-gray-900 min-h-screen p-10'>
@@ -21,8 +37,8 @@ function News() {
       </p>
 
 
-      <div className='grid grid-cols-1 gap-32 w-full  overflow-auto'>
-        {newsData.map((newsItem) => (
+      <div className='mt-8 grid grid-cols-1 gap-32 w-full  overflow-auto'>
+        {news.map((newsItem) => (
           <NewsCard key={newsItem.id} newsItem={newsItem} />
         ))}
       </div>

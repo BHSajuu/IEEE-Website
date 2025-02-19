@@ -31,5 +31,6 @@ model Event {
   title       String
   description String
   image       String
-  lastUpdated String
+  link        String
+  date        DateTime
 }

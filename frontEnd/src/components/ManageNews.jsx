@@ -1,23 +1,41 @@
-import React, { useState } from "react";
-import { newsData } from "../utility/TeamData";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import Loader from "./Loader";
 
 const ManageNews = () => {
-  const [news, setNews] = useState(newsData);
-
+  const [news, setNews] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [currNews, setCurrNews] = useState({
     title: "",
     description: "",
     newsUrl: "",
-    date: "",
+    date: new Date().toISOString().split('T')[0],
   });
 
-  const handleRemoveEvent = (id) => {
-    const updatedNews = news.filter((e) => e.id !== id);
-    setNews(updatedNews);
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const response = await axios.get('/api/news');
+        setNews(response.data.data || []);
+      } catch (error) {
+        toast.error('Failed to load news');
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchNews();
+  }, []);
 
-    const index = newsData.findIndex((e) => e.id === id);
-    if (index > -1) {
-      newsData.splice(index, 1);
+  const handleRemoveEvent = async (id) => {
+    try {
+      await axios.delete(`/api/news/${id}`);
+      setNews(prev => prev.filter(item => item.id !== id));
+      toast.success('News deleted successfully');
+    } catch (error) {
+      toast.error('Failed to delete news');
+      console.error(error);
     }
   };
 
@@ -32,30 +50,34 @@ const ManageNews = () => {
     }
   };
 
-  const handleClick = (e) => {
-    e.preventDefault(); // Prevent page reload
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!currNews.title || !currNews.description || !currNews.newsUrl) {
+      toast.error('Please fill all required fields');
+      return;
+    }
 
-    if (currNews.title && currNews.description && currNews.date) {
-      const newNews = { id: Date.now(), ...currNews };
-
-      // Update local state
-      const updatedNews = [...news, newNews];
-      setNews(updatedNews);
-
-      // Update the external 'newsData' array
-      newsData.push(newNews);
-
-      // Reset the form
+    try {
+      const response = await axios.post('/api/news', {
+        ...currNews,
+        date: new Date(currNews.date).toISOString()
+      });
+      setNews(prev => [...prev, response.data]);
       setCurrNews({
         title: "",
         description: "",
         newsUrl: "",
-        date: "",
+        date: new Date().toISOString().split('T')[0]
       });
-    } else {
-      alert("Please fill out all required fields!");
+      toast.success('News added successfully!');
+    } catch (error) {
+      toast.error('Failed to add news');
+      console.error(error);
     }
   };
+
+  if (loading) return <Loader/>;
 
   return (
     <main className="p-4 sm:p-6 flex flex-col  items-center min-h-screen ">
@@ -65,7 +87,7 @@ const ManageNews = () => {
         <h2 className="text-xl font-semibold mb-4">Add New News</h2>
         {/* Card Content (Form) */}
         
-          <form onSubmit={handleClick}>
+          <form onSubmit={handleSubmit}>
             <div className="grid w-full gap-4">
               {/* Title */}
               <div className="flex flex-col space-y-1.5">
