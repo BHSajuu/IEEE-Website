@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import SettingsSharpIcon from "@mui/icons-material/SettingsSharp";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import GroupIcon from "@mui/icons-material/Group";
-import EventIcon from "@mui/icons-material/Event";
 import AssessmentIcon from "@mui/icons-material/Assessment";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import EventIcon from "@mui/icons-material/Event";
+import GroupIcon from "@mui/icons-material/Group";
 import MenuIcon from "@mui/icons-material/Menu";
-import Overview from "../components/Overview";
-import ManageTeam from "../components/ManageTeam";
+import SettingsSharpIcon from "@mui/icons-material/SettingsSharp";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import Loader from "../components/Loader";
 import ManageEvent from "../components/ManageEvent";
 import ManageNews from "../components/ManageNews";
-import Loader from "../components/Loader";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import ProfileModal from "../components/ProfileModal";
+import ManageTeam from "../components/ManageTeam";
+import Overview from "../components/Overview";
 
 const Dashboard = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -34,26 +34,29 @@ const Dashboard = () => {
       .get("/api/auth/me", { headers: { Authorization: `Bearer ${token}` } })
       .then((res) => {
         setUser(res.data);
-        setProfile({ name: res.data.name, image: res.data.image });
       })
       .catch((error) => {
-        console.error("Error fetching user data", error);
+        let message = "Error fetching user data.";
+        if (error.response && error.response.data) {
+          // Check for the error message in the `error` property
+          if (error.response.data.error) {
+            message = error.response.data.error;
+          } else if (
+            error.response.data.errors &&
+            error.response.data.errors.length > 0
+          ) {
+            message = error.response.data.errors[0].msg;
+          } else if (error.response.data.message) {
+            message = error.response.data.message;
+          }
+        }
+        toast.error(message);
         navigate("/login");
       });
   }, [navigate]);
 
   // Update profile API call with token in header.
-  const handleProfileSave = async (data) => {
-    const token = localStorage.getItem("token");
-    try {
-      const res = await axios.put("/api/auth/update-profile", data, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setProfile(res.data.user);
-    } catch (error) {
-      console.error("Error updating profile", error);
-    }
-  };
+  // we will implement this function later
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -83,29 +86,25 @@ const Dashboard = () => {
           <ul className="space-y-4">
             <li
               onClick={() => setActiveComponent("overview")}
-              className="px-4 py-2 hover:bg-custom-blue hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out flex items-center"
-            >
+              className="px-4 py-2 hover:bg-custom-blue hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out flex items-center">
               <DashboardIcon className="mr-2" />
               <p>Overview</p>
             </li>
             <li
               onClick={() => setActiveComponent("ManageTeam")}
-              className="px-4 py-2 hover:bg-custom-blue hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out flex items-center"
-            >
+              className="px-4 py-2 hover:bg-custom-blue hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out flex items-center">
               <GroupIcon className="mr-2" />
               <p>Manage Team Members</p>
             </li>
             <li
               onClick={() => setActiveComponent("ManageEvents")}
-              className="px-4 py-2 hover:bg-custom-blue hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out flex items-center"
-            >
+              className="px-4 py-2 hover:bg-custom-blue hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out flex items-center">
               <EventIcon className="mr-2" />
               <p>Manage Events</p>
             </li>
             <li
               onClick={() => setActiveComponent("news")}
-              className="px-4 py-2 hover:bg-custom-blue hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out flex items-center"
-            >
+              className="px-4 py-2 hover:bg-custom-blue hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out flex items-center">
               <AssessmentIcon className="mr-2" />
               <p>Manage News</p>
             </li>
@@ -117,8 +116,7 @@ const Dashboard = () => {
             <li className="px-4 py-2 hover:bg-custom-blue hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out relative flex items-center">
               <button
                 onClick={toggleDropdown}
-                className="w-full text-left focus:outline-none flex items-center"
-              >
+                className="w-full text-left focus:outline-none flex items-center">
                 <SettingsSharpIcon className="mr-2" />
                 Settings
               </button>
@@ -126,26 +124,8 @@ const Dashboard = () => {
                 <ul className="absolute left-0 bottom-full mb-2 w-full bg-gray-900 text-white shadow-lg rounded-md">
                   <li className="px-4 py-2 hover:bg-custom-blue hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out">
                     <button
-                      onClick={() => setIsProfileOpen(true)}
-                      className="w-full text-left focus:outline-none"
-                    >
-                      Profile
-                    </button>
-                    {isProfileOpen && (
-                      <ProfileModal
-                        isOpen={isProfileOpen}
-                        onClose={() => setIsProfileOpen(false)}
-                        currentName={profile.name}
-                        currentImage={profile.image}
-                        onSave={handleProfileSave}
-                      />
-                    )}
-                  </li>
-                  <li className="px-4 py-2 hover:bg-custom-blue hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out">
-                    <button
                       onClick={handleLogout}
-                      className="w-full text-left focus:outline-none"
-                    >
+                      className="w-full text-left focus:outline-none">
                       Logout
                     </button>
                   </li>
@@ -162,8 +142,7 @@ const Dashboard = () => {
           <div className="absolute top-32 left-10 bg-custom-blue w-64 rounded-lg shadow-lg p-5">
             <button
               onClick={() => setMenuOpen(false)}
-              className="absolute top-2 right-2 hover:font-bold md:hidden text-white focus:outline-none"
-            >
+              className="absolute top-2 right-2 hover:font-bold md:hidden text-white focus:outline-none">
               ✖
             </button>
             <nav className="mt-6 p-4 flex-grow">
@@ -173,8 +152,7 @@ const Dashboard = () => {
                     setActiveComponent("overview");
                     setMenuOpen(false);
                   }}
-                  className="px-4 py-2 hover:bg-custom-blue hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out flex items-center"
-                >
+                  className="px-4 py-2 hover:bg-custom-blue hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out flex items-center">
                   <DashboardIcon className="mr-2" />
                   <p>Overview</p>
                 </li>
@@ -183,8 +161,7 @@ const Dashboard = () => {
                     setActiveComponent("ManageTeam");
                     setMenuOpen(false);
                   }}
-                  className="px-4 py-2 hover:bg-custom-blue hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out flex items-center"
-                >
+                  className="px-4 py-2 hover:bg-custom-blue hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out flex items-center">
                   <GroupIcon className="mr-2" />
                   <p>Manage Team Members</p>
                 </li>
@@ -193,8 +170,7 @@ const Dashboard = () => {
                     setActiveComponent("ManageEvents");
                     setMenuOpen(false);
                   }}
-                  className="px-4 py-2 hover:bg-custom-blue hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out flex items-center"
-                >
+                  className="px-4 py-2 hover:bg-custom-blue hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out flex items-center">
                   <EventIcon className="mr-2" />
                   <p>Manage Events</p>
                 </li>
@@ -203,8 +179,7 @@ const Dashboard = () => {
                     setActiveComponent("news");
                     setMenuOpen(false);
                   }}
-                  className="px-4 py-2 hover:bg-custom-blue hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out flex items-center"
-                >
+                  className="px-4 py-2 hover:bg-custom-blue hover:text-black hover:rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out flex items-center">
                   <AssessmentIcon className="mr-2" />
                   <p>Manage News</p>
                 </li>
@@ -219,8 +194,7 @@ const Dashboard = () => {
         <header className="bg-slate-400 shadow px-4 py-3 flex justify-between items-center">
           <button
             onClick={toggleMenu}
-            className="md:hidden text-custom-color4 focus:outline-none"
-          >
+            className="md:hidden text-custom-color4 focus:outline-none">
             <MenuIcon />
           </button>
         </header>
